@@ -4,7 +4,7 @@ dy = [0, 1, 0, -1]
 
 def gisa_move(gisa, dir):
     r, c, h, w = map(int, gisa_dict[gisa][:4])
-    if 0 <= r + dx[dir] + h - 1 < L and 0 <= c + dy[dir] + w - 1 < L:
+    if r + dx[dir] >= 0 and c + dy[dir] >= 0 and r + dx[dir] + h - 1 < L and c + dy[dir] + w - 1 < L:
         check_chess = sum([chess_board[x][c + dy[dir]: c + dy[dir] + w] for x in range(r + dx[dir], r + dx[dir] + h)], [])
         if not 2 in check_chess:
             move_location = [gisa_board[x][c + dy[dir]: c + dy[dir] + w] for x in range(r + dx[dir], r + dx[dir] + h)]
@@ -64,4 +64,5 @@ if __name__ == "__main__":
                     damage_dict[move_gisa] += tmp_damage[move_gisa]
                     gisa_dict[move_gisa][0] = move_dict[move_gisa][0]
                     gisa_dict[move_gisa][1] = move_dict[move_gisa][1]
+
     print(sum(damage_dict.values()))
